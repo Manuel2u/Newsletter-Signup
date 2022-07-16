@@ -31,6 +31,7 @@ app.post("/", function(req, res) {
 
   const run = async () => {
     const response = await client.lists.batchListMembers("b528f69856", {
+      update_existing:true,
       members: [{
         email_address: email,
         status: "subscribed",
@@ -42,14 +43,14 @@ app.post("/", function(req, res) {
     });
     console.log(response);
 
-    if (response.new_members[0].status === "subscribed") {
+    if (response.new_members.length !== 0 ) {
       res.sendFile(__dirname + "/success.html");
-    }
-    else if (response.errors[0].error_code === "ERROR_CONTACT_EXISTS") {
-      res.sendFile(__dirname + "/failure.html");
     }
     else if (response.error_count !== 0) {
         res.sendFile(__dirname + "/failure.html");
+    }
+    else if (response.updated_members.length !== 0 ) {
+        res.sendFile(__dirname + "/updated.html");
     }
 
 
