@@ -44,9 +44,14 @@ app.post("/", function(req, res) {
 
     if (response.new_members[0].status === "subscribed") {
       res.sendFile(__dirname + "/success.html");
-    } else {
+    }
+    else if (response.errors[0].error_code === "ERROR_CONTACT_EXISTS") {
       res.sendFile(__dirname + "/failure.html");
     }
+    else if (response.error_count !== 0) {
+        res.sendFile(__dirname + "/failure.html");
+    }
+
 
     app.post("/failure",function(req,res){
       res.redirect("/");
