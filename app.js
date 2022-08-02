@@ -4,7 +4,7 @@ const bodyParser = require("body-parser");
 const request = require("request");
 const https = require("https");
 const client = require("mailchimp-marketing");
-
+require('dotenv').config();
 
 app.use(bodyParser.urlencoded({
   extended: true
@@ -25,12 +25,12 @@ app.post("/", function(req, res) {
 
 
   client.setConfig({
-    apiKey: "3b610b2b3d11d3ead389b496555f6418-us18",
-    server: "us18",
+    apiKey: process.env.API_KEY,
+    server: process.env.SERVER,
   });
 
   const run = async () => {
-    const response = await client.lists.batchListMembers("b528f69856", {
+    const response = await client.lists.batchListMembers(process.env.LIST_ID, {
       update_existing:true,
       members: [{
         email_address: email,
