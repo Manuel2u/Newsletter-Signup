@@ -17,4 +17,4 @@
 
 # This is a web application used to make your audience sign up to your newsletters.
 
-** You can access your API_KEYS AND other relevant environment variables  from ** [https://mailchimp.com/developer/] 
+**You can access your API_KEYS AND other relevant environment variables  from** [https://mailchimp.com/developer/] 
